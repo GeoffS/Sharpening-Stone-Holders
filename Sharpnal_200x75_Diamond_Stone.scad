@@ -24,6 +24,11 @@ holderBaseCZ = 4;
 holderBaseCornerOffsetX = holderBaseX/2 - holderBaseCornerDia/2;
 holderBaseCornerOffsetY = holderBaseY/2 - holderBaseCornerDia/2;
 
+cutoutCornerDia = 20;
+cutoutOffsetXY = 10;
+cutoutCornerChamferDia = cutoutCornerDia + 5;
+cutoutCornerCZ = 1;
+
 module itemModule()
 {
 	difference()
@@ -32,12 +37,14 @@ module itemModule()
 		hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
 
 		// Base cut-out:
-		cutoutCornerDia = 20;
-		cutoutOffsetXY = 10;
-		hull() doubleX() doubleY() translate([stoneX/2-holderBaseCornerDia/2-cutoutOffsetXY, stoneY/2-holderBaseCornerDia/2-cutoutOffsetXY, -10]) 
-		{
-			cylinder(d=holderBaseCornerDia, h=100);
-		}
+		// Main cut-out:
+		baseCutoutXform() tcy([0,0,-10], d=cutoutCornerDia, h=100);
+		// Bottom chamfer:
+		baseCutoutXform()
+			translate([0,0,-cutoutCornerChamferDia/2+cutoutCornerDia/2+cutoutCornerCZ]) cylinder(d2=0, d1=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
+		// Top chamfer:
+		baseCutoutXform()
+			translate([0,0,holderUnderStoneZ-cutoutCornerDia/2-cutoutCornerCZ]) cylinder(d1=0, d2=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
 
 		// Base interior:
 		difference()
@@ -63,9 +70,14 @@ module itemModule()
 	}
 }
 
+module baseCutoutXform()
+{
+	hull() doubleX() doubleY() translate([stoneX/2-cutoutCornerDia/2-cutoutOffsetXY, stoneY/2-cutoutCornerDia/2-cutoutOffsetXY, 0]) children();
+}
+
 module clip(d=0)
 {
-	tc([-200, -400-d, -10], 400);
+	// tc([-200, -400-d, -10], 400);
 }
 
 if(developmentRender)
