@@ -5,8 +5,8 @@ stoneX = 201;
 stoneY = 75.6;
 stoneZ = 17;
 
-stoneSurfaceAboveDeskZ = 40;
-stoneSurfaceAboveHolderZ = 10;
+stoneSurfaceAboveDeskZ = 30;
+stoneSurfaceAboveHolderZ = 8;
 
 holderBaseCornerDia = 20;
 holderBaseWallAdjXY = -2;
@@ -25,7 +25,7 @@ holderBaseCornerOffsetX = holderBaseX/2 - holderBaseCornerDia/2;
 holderBaseCornerOffsetY = holderBaseY/2 - holderBaseCornerDia/2;
 
 cutoutCornerDia = 20;
-cutoutOffsetXY = 10;
+cutoutOffsetXY = 12;
 cutoutCornerChamferDia = cutoutCornerDia + 5;
 cutoutCornerCZ = 1;
 
@@ -37,12 +37,12 @@ module itemModule()
 		hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
 
 		// Base cut-out:
-		// Main cut-out:
+		//    Main cut-out:
 		baseCutoutXform() tcy([0,0,-10], d=cutoutCornerDia, h=100);
-		// Bottom chamfer:
+		//    Bottom chamfer:
 		baseCutoutXform()
 			translate([0,0,-cutoutCornerChamferDia/2+cutoutCornerDia/2+cutoutCornerCZ]) cylinder(d2=0, d1=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
-		// Top chamfer:
+		//    Top chamfer:
 		baseCutoutXform()
 			translate([0,0,holderUnderStoneZ-cutoutCornerDia/2-cutoutCornerCZ]) cylinder(d1=0, d2=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
 
@@ -83,7 +83,7 @@ module clip(d=0)
 if(developmentRender)
 {
 	display() itemModule();
-	// displayGhost() stoneGhost();
+	displayGhost() stoneGhost();
 }
 else
 {
