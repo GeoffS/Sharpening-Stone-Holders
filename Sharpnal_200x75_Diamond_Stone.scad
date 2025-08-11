@@ -1,6 +1,9 @@
 include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
 
+makeWithCutout = false;
+makeWithoutCutout = false;
+
 stoneX = 201;
 stoneY = 75.6;
 stoneZ = 17;
@@ -29,22 +32,25 @@ cutoutOffsetXY = 12;
 cutoutCornerChamferDia = cutoutCornerDia + 5;
 cutoutCornerCZ = 1;
 
-module itemModule()
+module itemModule(doCutout)
 {
 	difference()
 	{
 		// Base exterior:
 		hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
 
-		// Base cut-out:
-		//    Main cut-out:
-		baseCutoutXform() tcy([0,0,-10], d=cutoutCornerDia, h=100);
-		//    Bottom chamfer:
-		baseCutoutXform()
-			translate([0,0,-cutoutCornerChamferDia/2+cutoutCornerDia/2+cutoutCornerCZ]) cylinder(d2=0, d1=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
-		//    Top chamfer:
-		baseCutoutXform()
-			translate([0,0,holderUnderStoneZ-cutoutCornerDia/2-cutoutCornerCZ]) cylinder(d1=0, d2=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
+		if(doCutout)
+		{
+			// Base cut-out:
+			//    Main cut-out:
+			baseCutoutXform() tcy([0,0,-10], d=cutoutCornerDia, h=100);
+			//    Bottom chamfer:
+			baseCutoutXform()
+				translate([0,0,-cutoutCornerChamferDia/2+cutoutCornerDia/2+cutoutCornerCZ]) cylinder(d2=0, d1=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
+			//    Top chamfer:
+			baseCutoutXform()
+				translate([0,0,holderUnderStoneZ-cutoutCornerDia/2-cutoutCornerCZ]) cylinder(d1=0, d2=cutoutCornerChamferDia, h=cutoutCornerChamferDia/2);
+		}
 
 		// Base interior:
 		difference()
@@ -82,12 +88,13 @@ module clip(d=0)
 
 if(developmentRender)
 {
-	display() itemModule();
+	display() itemModule(doCutout=false);
 	displayGhost() stoneGhost();
 }
 else
 {
-	itemModule();
+	if(makeWithCutout) itemModule(doCutout=true);
+	if(makeWithoutCutout) itemModule(doCutout=false);
 }
 
 module stoneGhost()
