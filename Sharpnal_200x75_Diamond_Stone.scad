@@ -2,16 +2,17 @@ include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
 
 stoneX = 201;
-stoneY = 76;
+stoneY = 75.6;
 stoneZ = 17;
 
 stoneSurfaceAboveDeskZ = 40;
 stoneSurfaceAboveHolderZ = 10;
 
 holderBaseCornerDia = 20;
+holderBaseWallAdjXY = -2;
 
-holderBaseX = stoneX + holderBaseCornerDia;
-holderBaseY = stoneY + holderBaseCornerDia;
+holderBaseX = stoneX + holderBaseCornerDia + 2*holderBaseWallAdjXY;
+holderBaseY = stoneY + holderBaseCornerDia + 2*holderBaseWallAdjXY;
 holderBaseZ = stoneSurfaceAboveDeskZ - stoneSurfaceAboveHolderZ;
 
 echo(str("holderBaseX = ", holderBaseX));
@@ -62,8 +63,14 @@ module clip(d=0)
 if(developmentRender)
 {
 	display() itemModule();
+	displayGhost() stoneGhost();;
 }
 else
 {
 	itemModule();
+}
+
+module stoneGhost()
+{
+	tcu([-stoneX/2, -stoneY/2, holderUnderStoneZ], [stoneX, stoneY, stoneZ]);
 }
