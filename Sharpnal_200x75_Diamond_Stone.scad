@@ -31,6 +31,14 @@ module itemModule()
 		// Base exterior:
 		hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
 
+		// Base cut-out:
+		cutoutCornerDia = 20;
+		cutoutOffsetXY = 10;
+		hull() doubleX() doubleY() translate([stoneX/2-holderBaseCornerDia/2-cutoutOffsetXY, stoneY/2-holderBaseCornerDia/2-cutoutOffsetXY, -10]) 
+		{
+			cylinder(d=holderBaseCornerDia, h=100);
+		}
+
 		// Base interior:
 		difference()
 		{
@@ -57,13 +65,13 @@ module itemModule()
 
 module clip(d=0)
 {
-	//tc([-200, -400-d, -10], 400);
+	tc([-200, -400-d, -10], 400);
 }
 
 if(developmentRender)
 {
 	display() itemModule();
-	displayGhost() stoneGhost();;
+	// displayGhost() stoneGhost();
 }
 else
 {
