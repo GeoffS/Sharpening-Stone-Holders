@@ -4,7 +4,7 @@ include <../OpenSCAD_Lib/chamferedCylinders.scad>
 makeWithCutout = false;
 makeWithoutCutout = false;
 
-stoneX = 201;
+stoneX = 201.5;
 stoneY = 75.6;
 stoneZ = 17;
 
