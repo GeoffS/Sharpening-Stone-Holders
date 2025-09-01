@@ -47,12 +47,9 @@ module itemModule(doCutout)
 	difference()
 	{
 		// Base exterior:
-		// #hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
-		
-		// Ends:
 		union()
 		{
-			dx1 = -5;
+			dx1 = -3;
 			dx2 = dx1 - stoneSurfaceAboveHolderZ - 1.2;
 			doubleX() hull() doubleY()
 			{
@@ -95,7 +92,7 @@ module itemModule(doCutout)
 
 			numbsDia = 8;
 			// Interior nubs along X edges:
-			nubs1OffsetX = stoneX/2 - 7;
+			nubs1OffsetX = stoneX/2 - 5;
 			nubs1OffsetY = stoneY/2 + numbsDia/2;
 			doubleX() doubleY() translate([nubs1OffsetX, nubs1OffsetY, 0]) simpleChamferedCylinder(d=numbsDia, h=holderBaseZ, cz=1);
 
