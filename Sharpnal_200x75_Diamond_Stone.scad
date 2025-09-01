@@ -28,7 +28,8 @@ holderBaseCornerOffsetX = holderBaseX/2 - holderBaseCornerDia/2;
 holderBaseCornerOffsetY = holderBaseY/2 - holderBaseCornerDia/2;
 
 cutoutCornerDia = 20;
-cutoutOffsetXY = 12;
+cutoutOffsetX = 30;
+cutoutOffsetY = 15;
 cutoutCornerChamferDia = cutoutCornerDia + 5;
 cutoutCornerCZ = 1;
 
@@ -106,7 +107,7 @@ module itemModule(doCutout)
 
 module baseCutoutXform()
 {
-	hull() doubleX() doubleY() translate([stoneX/2-cutoutCornerDia/2-cutoutOffsetXY, stoneY/2-cutoutCornerDia/2-cutoutOffsetXY, 0]) children();
+	hull() doubleX() doubleY() translate([stoneX/2-cutoutCornerDia/2-cutoutOffsetX, stoneY/2-cutoutCornerDia/2-cutoutOffsetY, 0]) children();
 }
 
 module clip(d=0)
@@ -116,8 +117,8 @@ module clip(d=0)
 
 if(developmentRender)
 {
-	display() itemModule(doCutout=false);
-	// displayGhost() stoneGhost();
+	display() itemModule(doCutout=true);
+	displayGhost() stoneGhost();
 }
 else
 {
