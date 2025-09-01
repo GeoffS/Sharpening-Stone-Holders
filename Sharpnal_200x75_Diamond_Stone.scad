@@ -64,7 +64,7 @@ module itemModule(doCutout)
 
 			numbsDia = 8;
 			// Interior nubs along X edges:
-			nubs1OffsetX = stoneX/2 - 30;
+			nubs1OffsetX = stoneX/2 - 7;
 			nubs1OffsetY = stoneY/2 + numbsDia/2;
 			doubleX() doubleY() translate([nubs1OffsetX, nubs1OffsetY, 0]) simpleChamferedCylinder(d=numbsDia, h=holderBaseZ, cz=1);
 
