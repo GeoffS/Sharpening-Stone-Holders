@@ -8,7 +8,7 @@ stoneX = 201.5;
 stoneY = 75.6;
 stoneZ = 17;
 
-stoneSurfaceAboveDeskZ = 30;
+stoneSurfaceAboveDeskZ = 40;
 stoneSurfaceAboveHolderZ = 8;
 
 holderBaseCornerDia = 20;
