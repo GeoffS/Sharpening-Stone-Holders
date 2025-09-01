@@ -32,12 +32,43 @@ cutoutOffsetXY = 12;
 cutoutCornerChamferDia = cutoutCornerDia + 5;
 cutoutCornerCZ = 1;
 
+module corner(dx=0, z=holderBaseZ)
+{
+	translate([holderBaseCornerOffsetX+dx, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=z, cz=holderBaseCZ);
+}
+
+module corners()
+{
+	doubleX() doubleY() corner();
+}
+
 module itemModule(doCutout)
 {
 	difference()
 	{
 		// Base exterior:
-		hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
+		// #hull() doubleX() doubleY() translate([holderBaseCornerOffsetX, holderBaseCornerOffsetY, 0]) simpleChamferedCylinderDoubleEnded(d=holderBaseCornerDia, h=holderBaseZ, cz=holderBaseCZ);
+		
+		// Ends:
+		union()
+		{
+			dx1 = -5;
+			dx2 = dx1 - stoneSurfaceAboveHolderZ - 1.2;
+			doubleX() hull() doubleY()
+			{
+				corner();
+				corner(dx=dx1);
+			}
+			doubleX() hull() doubleY()
+			{
+				corner(dx=dx1);
+				corner(dx=dx2, z=holderUnderStoneZ);
+			}
+			hull() doubleX() doubleY()
+			{
+				corner(dx=dx2, z=holderUnderStoneZ);
+			}
+		}
 
 		if(doCutout)
 		{
@@ -89,7 +120,7 @@ module clip(d=0)
 if(developmentRender)
 {
 	display() itemModule(doCutout=false);
-	displayGhost() stoneGhost();
+	// displayGhost() stoneGhost();
 }
 else
 {
