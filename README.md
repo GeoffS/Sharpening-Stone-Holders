@@ -1,7 +1,7 @@
 # Sharpening-Stone-Holders
 
 ## General Information
-These desgings are all created using OpenSCAD.
+These designs are all created using OpenSCAD.
 To compile them into STL (or other 3D formats), you will need:
 * [OpenSCAD](https://openscad.orghttps://openscad.org) version >= 2025.05.14
 * My [OpenSCAD library Version 1.0 or newer](https://github.com/GeoffS/OpenSCAD_Lib/releases/tag/v1.0) available at the same directory level as this project.
@@ -19,6 +19,10 @@ This is a very basic holder for 75x200mm stones.
 
 The STL files in [Release 1.0]() were created with the command:
 
-`python ..\OpenSCAD_Lib\makeStls.py .\Sharpnal_200x75_Diamond_Stone.scad`
+`python ..\OpenSCAD_Lib\makeStls.py .\Sharpal_200x75_Diamond_Stone.scad`
 
-![Photo of the Sharpal stone holder with a stone in it](README_Assets\20250901_185623~2.jpg)
+This will create two STL files:
+* `Sharpal_200x75_Diamond_Stone WithCutout.stl` - The stone-holder with a cutout in the base underneath the stone to reduce filament use.
+* `Sharpal_200x75_Diamond_Stone WithoutCutout.stl` - The same as above, but with a solid base.
+
+![Photo of the Sharpal stone holder with a stone in it](README_Assets/20250901_185623~2.jpg)
