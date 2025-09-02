@@ -7,7 +7,7 @@ To compile them into STL (or other 3D formats), you will need:
 * My [OpenSCAD library Version 1.0 or newer](https://github.com/GeoffS/OpenSCAD_Lib/releases/tag/v1.0) available at the same directory level as this project.
 * Optional: python 3.x
 
-In general you can compile any of these SCAD files into an STL via the command-line run fron the source-code directory:
+In general you can compile any of these SCAD files into STL file(s) via this command run from the source-code directory:
 
 `python ..\OpenSCAD_Lib\makeStls.py <SCAD File>`
 
