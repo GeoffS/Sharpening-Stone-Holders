@@ -18,9 +18,6 @@
 include <../OpenSCAD_Lib/MakeInclude.scad>
 include <../OpenSCAD_Lib/chamferedCylinders.scad>
 
-makeWithCutout = false;
-makeWithoutCutout = false;
-
 holderBaseCornerDia = 20;
 holderBaseWallAdjXY = -2;
 

@@ -14,6 +14,9 @@
 // along with this program (see the LICENSE file in this directory).  
 // If not, see <https://www.gnu.org/licenses/>.
 
+makeWithCutout = false;
+makeWithoutCutout = false;
+
 stoneX = 151.5;
 stoneY = 63;
 stoneZ = 2.5;
