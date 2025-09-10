@@ -17,11 +17,11 @@
 makeWithCutout = false;
 makeWithoutCutout = false;
 
-stoneX = 151.5;
+stoneX = 152.1;
 stoneY = 63;
 stoneZ = 2.5;
 
-stoneSurfaceAboveDeskZ = 11; //40;
-stoneSurfaceAboveHolderZ = 0.4;
+stoneSurfaceAboveDeskZ = 40;
+stoneSurfaceAboveHolderZ = -0.9;
 
 include <Stone_Holder_Base.scad>
