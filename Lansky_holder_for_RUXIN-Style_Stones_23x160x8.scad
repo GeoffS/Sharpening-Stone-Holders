@@ -11,7 +11,7 @@ stoneRecessExtraY = 6;
 lanskyRodExtensionY = 18;
 lanskyRodHoleOffsetY = 7.7; //
 
-lanskyRodHoleDia = 3.3;
+lanskyRodHoleDia = 3.8;
 lanskyRodHoleCtrY = -(lanskyRodExtensionY-lanskyRodHoleOffsetY);
 
 rodRetainingScrewHoleDia = 2.9; // m3 tapped
