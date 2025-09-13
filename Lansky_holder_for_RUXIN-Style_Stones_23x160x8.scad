@@ -10,12 +10,16 @@ lanskyRodHoleOffsetY = 7.7; //
 echo(str("lanskyRodCleananceZ = ", lanskyRodCleananceZ));
 
 lanskyRodHoleDia = 3.3;
+lanskyRodHoleCtrY = -(lanskyRodExtensionY-lanskyRodHoleOffsetY);
+
+rodRetainingScrewHoleDia = 2.8; // m3 tapped
 
 gripZ = 10;
 
 holderX = stoneX;
 holderY = stoneY +lanskyRodExtensionY + 10;
 holderZ = lanskyRodCleananceZ + gripZ;
+holderAtRodEndZ = holderZ-lanskyRodCleananceZ;
 
 module itemModule()
 {
@@ -27,16 +31,23 @@ module itemModule()
         }
 
         // Cut for rod:
-        tcu([-20, -40, holderZ-lanskyRodCleananceZ], 40);
+        tcu([-20, -40, holderAtRodEndZ], 40);
 
         // Rod hole:
-        tcy([0, -(lanskyRodExtensionY-lanskyRodHoleOffsetY), -30], d=lanskyRodHoleDia, h=100);
+        tcy([0, lanskyRodHoleCtrY, -30], d=lanskyRodHoleDia, h=100);
+        rodRetainingScrewHoleXform() tcy([0,0,-100], d=rodRetainingScrewHoleDia, h=100);
     }
+}
+
+module rodRetainingScrewHoleXform()
+{
+    translate([0, lanskyRodHoleCtrY+4, holderAtRodEndZ/2]) rotate([-90,0,0]) children();
 }
 
 module clip(d=0)
 {
 	//tc([-200, -400-d, -10], 400);
+    // tcu([-200, -50, holderAtRodEndZ/2-d], 400);
 }
 
 if(developmentRender)
