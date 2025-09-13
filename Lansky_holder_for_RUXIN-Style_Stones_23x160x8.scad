@@ -18,8 +18,9 @@ lanskyRodHoleCtrY = -(lanskyRodExtensionY-lanskyRodHoleOffsetY);
 
 rodRetainingScrewHoleDia = 2.8; // m3 tapped
 
+gripX = 12;
 gripZ = 12;
-gripToStoneZ = 1;
+gripToStoneZ = 2;
 
 stoneSurfaceZ = gripZ + gripToStoneZ;
 
@@ -34,7 +35,7 @@ module itemModule()
     {
         union()
         {
-            tcu([-holderX/2, -lanskyRodExtensionY, 0], [holderX, holderY, gripZ]);
+            tcu([-gripX/2, -lanskyRodExtensionY, 0], [gripX, holderY, gripZ]);
             tcu([-holderX/2, -lanskyRodExtensionY, gripZ-nothing], [holderX, holderY, gripToStoneZ+nothing]);
             tcu([-holderX/2, -lanskyRodExtensionY, gripZ+gripToStoneZ-nothing], [holderX, holderY, stoneRecessZ++nothing]);
         }
