@@ -8,10 +8,8 @@ stoneRecessY = stoneY + 1;
 stoneRecessZ = 3;
 stoneRecessExtraY = 6;
 
-lanskyRodCleananceZ = max(9.5-stoneZ, 0); //9.5; // OEM
 lanskyRodExtensionY = 18;
 lanskyRodHoleOffsetY = 7.7; //
-echo(str("lanskyRodCleananceZ = ", lanskyRodCleananceZ));
 
 lanskyRodHoleDia = 3.3;
 lanskyRodHoleCtrY = -(lanskyRodExtensionY-lanskyRodHoleOffsetY);
@@ -20,14 +18,20 @@ rodRetainingScrewHoleDia = 2.8; // m3 tapped
 
 gripX = 12;
 gripZ = 12;
-gripToStoneZ = 2;
+gripToStoneZ = 4;
 
-stoneSurfaceZ = gripZ + gripToStoneZ;
+stoneMountingSurfaceZ = gripZ + gripToStoneZ;
+
+// The surface of the sharpening stone:
+stoneSurfaceZ = stoneMountingSurfaceZ + stoneZ;
+
+lanskyRodCleananceZ = max(9.5, stoneZ); //9.5; // OEM
+echo(str("lanskyRodCleananceZ = ", lanskyRodCleananceZ));
 
 holderX = stoneX;
 holderY = stoneRecessY +lanskyRodExtensionY + 2*stoneRecessExtraY;
-holderZ = stoneSurfaceZ + stoneRecessZ;
-holderAtRodEndZ = holderZ-lanskyRodCleananceZ;
+holderZ = stoneMountingSurfaceZ + stoneRecessZ;
+holderAtRodEndZ = min((stoneSurfaceZ - lanskyRodCleananceZ), gripZ);
 
 module itemModule()
 {
@@ -36,12 +40,18 @@ module itemModule()
         union()
         {
             tcu([-gripX/2, -lanskyRodExtensionY, 0], [gripX, holderY, gripZ]);
-            tcu([-holderX/2, -lanskyRodExtensionY, gripZ-nothing], [holderX, holderY, gripToStoneZ+nothing]);
+            dz = 1;
+            translate([0, -lanskyRodExtensionY, gripZ-nothing]) hull()
+            {
+                tcu([-gripX/2, 0, 0], [gripX, holderY, nothing]);
+                tcu([-holderX/2, 0, gripToStoneZ-dz], [holderX, holderY, nothing]);
+            }
+            tcu([-holderX/2, -lanskyRodExtensionY, gripZ+gripToStoneZ-dz], [holderX, holderY, gripToStoneZ-dz+nothing]);
             tcu([-holderX/2, -lanskyRodExtensionY, gripZ+gripToStoneZ-nothing], [holderX, holderY, stoneRecessZ++nothing]);
         }
 
         // Recess for stone:
-        tcu([-200, stoneRecessExtraY, stoneSurfaceZ], [400, stoneRecessY, 400]);
+        tcu([-200, stoneRecessExtraY, stoneMountingSurfaceZ], [400, stoneRecessY, 400]);
 
         // Cut for rod:
         tcu([-20, -40, holderAtRodEndZ], 40);
@@ -77,5 +87,5 @@ else
 
 module stoneGhost()
 {
-    translate([0, stoneRecessExtraY+(stoneRecessY-stoneY)/2, stoneSurfaceZ]) tcu([-stoneX/2, 0, 0], [stoneX, stoneY, stoneZ]);
+    translate([0, stoneRecessExtraY+(stoneRecessY-stoneY)/2, stoneMountingSurfaceZ]) tcu([-stoneX/2, 0, 0], [stoneX, stoneY, stoneZ]);
 }
