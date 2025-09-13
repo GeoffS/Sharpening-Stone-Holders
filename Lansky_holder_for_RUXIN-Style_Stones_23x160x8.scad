@@ -31,7 +31,7 @@ echo(str("lanskyRodCleananceZ = ", lanskyRodCleananceZ));
 holderX = stoneX;
 holderY = stoneRecessY +lanskyRodExtensionY + 2*stoneRecessExtraY;
 holderZ = stoneMountingSurfaceZ + stoneRecessZ;
-holderAtRodEndZ = min((stoneSurfaceZ - lanskyRodCleananceZ), gripZ);
+holderAtRodEndZ = stoneSurfaceZ - lanskyRodCleananceZ; //min((stoneSurfaceZ - lanskyRodCleananceZ), gripZ);
 
 module itemModule()
 {
@@ -54,7 +54,13 @@ module itemModule()
         tcu([-200, stoneRecessExtraY, stoneMountingSurfaceZ], [400, stoneRecessY, 400]);
 
         // Cut for rod:
-        tcu([-20, -40, holderAtRodEndZ], 40);
+        // tcu([-lanskyRodHoleDia/2-0.3, -40+lanskyRodHoleCtrY, holderAtRodEndZ], [lanskyRodHoleDia+0.6, 40, 40]);
+        slotX = lanskyRodHoleDia + 2;
+        translate([0, lanskyRodHoleCtrY, holderAtRodEndZ]) hull()
+        {
+            tcy([0, 0, 0], d=slotX, h=100);
+            tcy([0, -10, 0], d=slotX, h=100);
+        }
 
         // Rod hole:
         tcy([0, lanskyRodHoleCtrY, -30], d=lanskyRodHoleDia, h=100);
