@@ -14,7 +14,7 @@ lanskyRodHoleOffsetY = 7.7; //
 lanskyRodHoleDia = 3.3;
 lanskyRodHoleCtrY = -(lanskyRodExtensionY-lanskyRodHoleOffsetY);
 
-rodRetainingScrewHoleDia = 2.8; // m3 tapped
+rodRetainingScrewHoleDia = 2.9; // m3 tapped
 
 gripX = 12;
 gripZ = 12;
@@ -25,13 +25,13 @@ stoneMountingSurfaceZ = gripZ + gripToStoneZ;
 // The surface of the sharpening stone:
 stoneSurfaceZ = stoneMountingSurfaceZ + stoneZ;
 
-lanskyRodCleananceZ = max(9.5, stoneZ); //9.5; // OEM
+lanskyRodCleananceZ = max(9.5, stoneZ); // 9.5 = OEM
 echo(str("lanskyRodCleananceZ = ", lanskyRodCleananceZ));
 
 holderX = stoneX;
 holderY = stoneRecessY +lanskyRodExtensionY + 2*stoneRecessExtraY;
 holderZ = stoneMountingSurfaceZ + stoneRecessZ;
-holderAtRodEndZ = stoneSurfaceZ - lanskyRodCleananceZ; //min((stoneSurfaceZ - lanskyRodCleananceZ), gripZ);
+holderAtRodEndZ = stoneSurfaceZ - lanskyRodCleananceZ;
 
 module itemModule()
 {
@@ -54,7 +54,6 @@ module itemModule()
         tcu([-200, stoneRecessExtraY, stoneMountingSurfaceZ], [400, stoneRecessY, 400]);
 
         // Cut for rod:
-        // tcu([-lanskyRodHoleDia/2-0.3, -40+lanskyRodHoleCtrY, holderAtRodEndZ], [lanskyRodHoleDia+0.6, 40, 40]);
         slotX = lanskyRodHoleDia + 2;
         translate([0, lanskyRodHoleCtrY, holderAtRodEndZ]) hull()
         {
