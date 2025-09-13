@@ -36,18 +36,20 @@ module itemModule()
         // Rod hole:
         tcy([0, lanskyRodHoleCtrY, -30], d=lanskyRodHoleDia, h=100);
         rodRetainingScrewHoleXform() tcy([0,0,-100], d=rodRetainingScrewHoleDia, h=100);
+        // Chamfer:
+        rodRetainingScrewHoleXform(y=-lanskyRodExtensionY-5+rodRetainingScrewHoleDia/2+1) translate([0,0,0]) cylinder(d1=10, d2=0, h=5);
     }
 }
 
-module rodRetainingScrewHoleXform()
+module rodRetainingScrewHoleXform(y=lanskyRodHoleCtrY+4)
 {
-    translate([0, lanskyRodHoleCtrY+4, holderAtRodEndZ/2]) rotate([-90,0,0]) children();
+    translate([0, y, holderAtRodEndZ/2]) rotate([-90,0,0]) children();
 }
 
 module clip(d=0)
 {
 	//tc([-200, -400-d, -10], 400);
-    // tcu([-200, -50, holderAtRodEndZ/2-d], 400);
+    tcu([-200, -50, holderAtRodEndZ/2-d], 400);
 }
 
 if(developmentRender)
